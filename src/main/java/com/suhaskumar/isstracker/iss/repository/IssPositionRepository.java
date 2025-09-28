@@ -1,4 +1,10 @@
 package com.suhaskumar.isstracker.iss.repository;
 
-public class IssPositionRepository {
+import com.suhaskumar.isstracker.iss.model.IssPosition;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface IssPositionRepository extends JpaRepository<IssPosition, Long>, JpaSpecificationExecutor<IssPosition> {
 }

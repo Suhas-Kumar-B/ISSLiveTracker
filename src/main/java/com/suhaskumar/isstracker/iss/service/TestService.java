@@ -1,4 +1,4 @@
-package com.suhaskumar.isstracker.service;
+package com.suhaskumar.isstracker.iss.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * A service with utility methods for verifying connections and features during development.
+ * Can be removed in a final production build.
+ */
 @Service
 public class TestService {
 
@@ -36,19 +40,14 @@ public class TestService {
     }
 
     /**
-     * Fetches ISS position. This method is cached for 10 seconds.
-     * The cache name is "iss-position".
+     * A simple cacheable method to test if the CacheConfig is working correctly.
      */
-    @Cacheable(value = "iss-position", key = "'current'")
-    public Map<String, Double> getIssPosition() {
-        // This log will only appear when the method is actually executed (not cached)
-        logger.info("--- FETCHING FRESH ISS POSITION (NOT FROM CACHE) ---");
-
-        // In a real application, you would call an external API here.
-        // We will simulate it by returning a map with the current time.
+    @Cacheable(value = "iss-position", key = "'test-cache'")
+    public Map<String, Double> getCacheTest() {
+        logger.info("--- EXECUTING CACHEABLE TEST METHOD (NOT FROM CACHE) ---");
         return Map.of(
-                "latitude", 20.5937,
-                "longitude", 78.9629,
+                "latitude", 12.2958,
+                "longitude", 76.6394,
                 "timestamp", (double) System.currentTimeMillis()
         );
     }
