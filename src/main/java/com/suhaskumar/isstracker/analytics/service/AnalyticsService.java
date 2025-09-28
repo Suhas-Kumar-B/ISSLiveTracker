@@ -9,13 +9,14 @@ public class AnalyticsService {
 
     private final IssPositionRepository issPositionRepository;
 
-    // Using constructor injection
     public AnalyticsService(IssPositionRepository issPositionRepository) {
         this.issPositionRepository = issPositionRepository;
     }
 
     public OrbitStats getOrbitStatistics() {
         long count = issPositionRepository.count();
-        return new OrbitStats(count, 0.0, 0.0); // Placeholder averages
+        double avgLat = issPositionRepository.getAverageLatitude();
+        double avgLon = issPositionRepository.getAverageLongitude();
+        return new OrbitStats(count, avgLat, avgLon);
     }
 }

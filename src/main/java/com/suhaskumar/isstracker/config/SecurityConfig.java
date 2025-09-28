@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -24,7 +25,6 @@ public class SecurityConfig {
     private final String adminName;
     private final String adminPassword;
 
-    // Using constructor injection
     public SecurityConfig(
             @Value("${security.user.name}") String userName,
             @Value("${security.user.password}") String userPassword,
@@ -51,13 +51,11 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Using BCrypt for strong, modern password hashing
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        // Building users with the secure password encoder
         UserDetails user = User.builder()
                 .username(userName)
                 .password(passwordEncoder.encode(userPassword))
