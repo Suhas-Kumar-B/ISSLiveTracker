@@ -19,8 +19,12 @@ public class TestService {
 
     private static final Logger logger = LoggerFactory.getLogger(TestService.class);
 
+    private final RedisTemplate<String, Object> redisTemplate;
+
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    public TestService(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     /**
      * Verifies the Redis connection by writing and reading a simple value.

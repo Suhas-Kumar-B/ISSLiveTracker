@@ -13,8 +13,11 @@ import java.util.Map;
 @RestController
 public class TestController {
 
+    private final TestService testService;
     @Autowired
-    private TestService testService;
+    public TestController(TestService testService){
+        this.testService=testService;
+    }
 
     @GetMapping("/")
     public String home() {
